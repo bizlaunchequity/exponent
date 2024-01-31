@@ -9,6 +9,8 @@ module Exponent
   module Push
     # Class send push notificatios to expo server
     class Client
+      PUSH_TOKEN_FORMAT = /ExponentPushToken\[.{22}\]/
+
       def self.send(message)
         message = handle_message(message)
 
@@ -30,7 +32,7 @@ module Exponent
       end
 
       def self.push_token?(token)
-        token.match?(/ExponentPushToken\[.{22}\]/)
+        token.match?(PUSH_TOKEN_FORMAT)
       end
 
       def self.handle_message(message)
